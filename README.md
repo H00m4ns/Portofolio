@@ -1,76 +1,49 @@
-# Nuxt Minimal Starter
+# 🧑‍💻 James – Backend Developer Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Halo! Saya **James** (`H00m4ns`), seorang **Backend Developer** yang fokus membangun API, microservices, dan sistem backend menggunakan **Go (Golang)**.  
+Website ini adalah portofolio pribadi yang menampilkan sebagian dari proyek yang pernah saya kerjakan.
 
-## Setup
+🌐 **Live Site:**  
+🔗 https://h00m4ns.github.io/Portofolio/
 
-Make sure to install dependencies:
+---
 
-```bash
-# npm
-npm install
+## 🚀 Tech Stack
 
-# pnpm
-pnpm install
+### **Frontend**
+- Nuxt 3 (SPA / SSG mode)
+- Tailwind-like styling (minimal custom CSS)
 
-# yarn
-yarn install
+### **Backend Tools**
+- Go (Golang)
+- Echo Framework
+- REST API Architecture
+- Docker (basic)
+- SQL Databases (MySQL / PostgreSQL)
+- Wablas API Integration (WhatsApp Automation)
 
-# bun
-bun install
-```
+### **DevOps**
+- GitHub Pages Deployment (via GitHub Actions)
+- CI/CD for auto-build & deploy
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## 📂 Projects Highlighted on This Portfolio
 
-```bash
-# npm
-npm run dev
+### 1. **Microservice Pengelolaan Absensi Multi PAUD**
+- Go (Echo), Flutter, Wablas API
+- Sistem absensi untuk banyak PAUD
+- Notifikasi WhatsApp otomatis ke orang tua
+- Arsitektur multi-tenant
 
-# pnpm
-pnpm dev
+### 2. **Asset Management Backend (Go)**
+- API untuk manajemen aset, kategori, lokasi, histori
+- Role-based access
+- Relational database design
 
-# yarn
-yarn dev
+### 3. **Absensi Sorong Selatan – Backend Service**
+- Service absensi ringan dan scalable
+- Endpoint untuk rekap kehadiran
+- Fokus pada kesederhanaan & reliability
 
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
-# Portofolio
+---
