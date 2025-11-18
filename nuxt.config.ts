@@ -1,8 +1,8 @@
 export default defineNuxtConfig({
   ssr: false,
   app: {
-    // Use root base URL for local development / preview
-    baseURL: '/Portofolio',
+  // Base URL for GitHub Pages deployment (repo is hosted under https://<user>.github.io/Portofolio/)
+  baseURL: '/Portofolio/',
     buildAssetsDir: '/_nuxt/'
   },
   nitro: {
