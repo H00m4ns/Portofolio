@@ -1,0 +1,281 @@
+/* Global theme + layout styles (consolidated)
+   This file replaces inline styles previously placed in `app.vue` and
+   `pages/index.vue`. Theme is applied by adding either `html.light` or
+   `html.dark` class on the document element. The app sets a default of
+   `light` when no preference is found.
+*/
+
+/* --- Base layout & typography (theme-agnostic) --- */
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Hero */
+.hero {
+  padding: 3rem 0 2rem;
+}
+.hero-text {
+  max-width: 680px;
+}
+.hero-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.accent { color: #2563eb; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.6rem 1.2rem; border-radius: 999px; font-size: 0.95rem; font-weight: 500; text-decoration: none; border: 1px solid transparent; cursor: pointer; }
+.btn-primary { box-shadow: none; }
+.btn-ghost { border-width: 1px; }
+
+/* Sections */
+.section { padding: 2rem 0; }
+.section-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; }
+.section-text { line-height: 1.7; margin-bottom: 0.5rem; }
+.two-column { display: grid; gap: 1.5rem; }
+@media (min-width: 768px) { .two-column { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Pills */
+.pill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0.5rem 0 0; list-style: none; }
+.pill { border-radius: 999px; padding: 0.3rem 0.75rem; font-size: 0.85rem; }
+.pill-small { font-size: 0.8rem; }
+
+/* Projects */
+.projects { display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1rem; }
+.project-card { border-radius: 0.75rem; padding: 1.25rem 1.25rem 1rem; border: 1px solid var(--border); box-shadow: 0 6px 18px rgba(16,24,40,0.06); }
+.project-header { display: flex; justify-content: space-between; gap: 0.75rem; align-items: flex-start; margin-bottom: 0.5rem; }
+.project-title { font-size: 1.05rem; font-weight: 600; }
+.project-role { font-size: 0.9rem; }
+.project-period { color: #9ca3af; }
+.project-link { font-size: 0.85rem; text-decoration: none; display:inline-flex; align-items:center; gap:0.4rem; padding:0.25rem 0.6rem; border-radius:999px; border:1px solid transparent; transition: background .18s ease, color .18s ease, transform .12s ease; }
+.project-link:hover { transform: translateY(-1px); }
+.project-link:focus { outline: 2px solid rgba(37,99,235,0.16); outline-offset: 2px; }
+.project-links { display: flex; gap: 0.5rem; align-items: center; }
+.project-description { font-size: 0.95rem; margin-bottom: 0.75rem; }
+.project-meta { display: grid; gap: 0.75rem; }
+@media (min-width: 768px) { .project-meta { grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr); } }
+.meta-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.project-highlights { margin: 0; padding-left: 1.1rem; font-size: 0.9rem; }
+
+/* Contact */
+.contact-list { list-style: none; padding: 0; margin: 0.5rem 0 0; display: grid; gap: 0.35rem; }
+.contact-list a { text-decoration: none; }
+
+/* Footer */
+.footer { margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; text-align: center; }
+
+/* Theme toggle switch (animated knob). Keep spacing/layout identical across themes; colors are controlled with theme variables below. */
+.theme-toggle {
+  --toggle-width: 56px;
+  --toggle-height: 32px;
+  --knob-size: 26px;
+
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 60;
+  width: var(--toggle-width);
+  height: var(--toggle-height);
+  padding: 3px;
+  border-radius: 9999px;
+  border: 1px solid var(--toggle-border, rgba(0,0,0,0.08));
+  background: var(--toggle-bg, #fff);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+@media (max-width: 640px) { .theme-toggle { top: auto; right: auto; bottom: 1rem; left: 1rem; } }
+.theme-toggle:focus { outline: 3px solid rgba(37,99,235,0.25); outline-offset: 2px; }
+
+.theme-toggle__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  display: block;
+}
+.theme-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%) translateX(0);
+  width: var(--knob-size);
+  height: var(--knob-size);
+  border-radius: 50%;
+  background: var(--knob-bg, #fff);
+  transition: transform 240ms cubic-bezier(.2,.9,.3,1), background 180ms linear, box-shadow 180ms;
+  box-shadow: 0 4px 10px rgba(2,6,23,0.08);
+}
+.theme-toggle.is-dark .theme-toggle__knob {
+  transform: translateY(-50%) translateX(calc(var(--toggle-width) - var(--knob-size) - 8px));
+}
+
+/* Theme color variables - only colors should differ between .light and .dark */
+html.light {
+  --bg: #ffffff;
+  --text: #0f1724;
+  --muted: #4b5563;
+  --accent: #2563eb;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --pill-bg: #f9fafb;
+  --pill-text: #0f1724;
+  --toggle-bg: #f3f4f6;
+  --toggle-border: rgba(15,23,36,0.06);
+  --knob-bg: #ffffff;
+}
+
+html.dark {
+  --bg: #0b1220;
+  --text: #e6eef8;
+  --muted: #cbd8e6;
+  --accent: #93c5fd;
+  --surface: rgba(255,255,255,0.02);
+  --border: rgba(255,255,255,0.04);
+  --pill-bg: rgba(255,255,255,0.14);
+  --pill-text: #ffffff;
+  --toggle-bg: rgba(255,255,255,0.04);
+  --toggle-border: rgba(79, 199, 255, 0.781);
+  --knob-bg: #ffffff;
+}
+
+/* Smooth transitions between light/dark colors for a gentler effect.
+   We transition background-color, color, and border-color for main surfaces.
+   Users who prefer reduced motion will not see these transitions.
+*/
+:root {
+  --transition-duration: 320ms;
+  --transition-ease: cubic-bezier(.2,.9,.3,1);
+}
+
+html, body, .page, .hero, .section, .project-card, .pill, .project-link, .btn-primary, .btn-ghost, .contact-list a {
+  transition: background-color var(--transition-duration) var(--transition-ease),
+              color calc(var(--transition-duration) * 0.8) var(--transition-ease),
+              border-color var(--transition-duration) var(--transition-ease);
+}
+
+/* For hero we previously set a dark gradient — switch to transparent so
+   the page background can fade smoothly. Text and accents still change color.
+*/
+.hero { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  html, body, .page, .hero, .section, .project-card, .pill, .project-link, .btn-primary, .btn-ghost, .contact-list a {
+    transition: none !important;
+  }
+}
+
+/* --- Light theme (explicit) --- */
+html.light { background: #ffffff; color: #0f1724; }
+html.light .page { color: #111827; }
+html.light .hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin-bottom: 0.75rem; }
+html.light .hero-subtitle { font-size: 1.3rem; font-weight: 500; color: #4b5563; margin-bottom: 0.75rem; }
+html.light .hero-tagline { color: #4b5563; margin-bottom: 1.5rem; line-height: 1.6; }
+
+html.light .btn-primary { background: #2563eb; color: white; }
+html.light .btn-primary:hover { background: #1d4ed8; }
+html.light .btn-ghost { border-color: #d1d5db; color: #374151; background: white; }
+html.light .btn-ghost:hover { background: #f3f4f6; }
+
+html.light .section { border-top: 1px solid #e5e7eb; background: #ffffff; }
+html.light .section-text { color: #4b5563; }
+html.light .pill { background: #f9fafb; color: #0f1724; border: 1px solid #e5e7eb; }
+
+html.light .project-card { background: #ffffff; border: 1px solid #e5e7eb; }
+html.light .project-role { color: #6b7280; }
+html.light .project-description, html.light .project-highlights { color: #4b5563; }
+html.light .project-link { color: #2563eb; border: 1px solid #2563eb; }
+html.light .contact-list a { color: #2563eb; }
+html.light .footer { color: #9ca3af; border-top: 1px solid #e5e7eb; }
+
+/* Toggle icon color variable */
+html.light { --toggle-icon: #f59e0b; }
+
+/* --- Dark theme (explicit) --- */
+html.dark { background: #0b1220; color: #e6eef8; }
+html.dark .page { color: #e6eef8; }
+html.dark .hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: #f1f7fb; margin-bottom: 0.75rem; }
+html.dark .hero { background: linear-gradient(180deg, rgba(11,18,32,0.9), rgba(15,23,36,0.9)); color: #f1f7fb; }
+html.dark .hero-subtitle, html.dark .hero-tagline { color: #f1f7fb; }
+html.dark .hero-title { color: #ffffff; }
+
+html.dark .section { background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.04); }
+html.dark .section-title, html.dark .project-title { color: #ffffff; }
+html.dark .section-text, html.dark .project-description, html.dark .project-highlights, html.dark .project-role { color: #cbd8e6; }
+
+/* Toggle icon color variable for dark */
+html.dark { --toggle-icon: #f8fafc; }
+
+html.dark .project-card { background: var(--surface); border-color: var(--border); }
+html.dark .project-link { color: var(--accent); background: transparent; border-color: rgba(255,255,255,0.06); }
+
+html.dark .pill, html.dark .pill-small { background: rgba(255,255,255,0.03); color: #e6eef8; border-color: rgba(255,255,255,0.06); }
+
+/* stronger overrides where component-scoped styles previously hid contrast */
+html.dark .project-title { color: #ffffff !important; }
+html.dark .section-title { color: #ffffff !important; }
+html.dark .pill, html.dark .pill-small { background: rgba(255,255,255,0.14) !important; color: #ffffff !important; border-color: rgba(255,255,255,0.12) !important; }
+html.dark .project-link { color: #93c5fd !important; }
+html.dark .project-role, html.dark .project-description, html.dark .section-text { color: #d7e6f8 !important; }
+
+html.dark .btn-primary { background: var(--accent); color: var(--knob-bg); }
+html.dark .btn-primary:hover { filter: brightness(.95); }
+html.dark .btn-ghost { background: transparent; color: var(--pill-text); border-color: var(--toggle-border); }
+html.dark .btn-ghost:hover { background: rgba(255,255,255,0.02); }
+html.dark .contact-list a { color: var(--accent); }
+html.dark .contact-list a:hover { color: #cfe6ff; }
+
+/* Ensure project period/labels remain legible in both themes */
+html.dark .project-period { color: #6b7280; }
+html.light .project-period { color: #6b7280; }
+
+/* SVG-based animated toggle styles (from toggles.dev adapted)
+   - the SVG uses `currentColor` so we control icon color via --toggle-icon
+   - `.is-dark` on the button triggers the dark animation state
+*/
+.theme-toggle { color: var(--toggle-icon); display:inline-flex; align-items:center; justify-content:center; padding:6px; border-radius:9999px; }
+.theme-toggle .theme-toggle__within { width: 1.25rem; height: 1.25rem; display:block; transition: transform 260ms cubic-bezier(.2,.9,.3,1), color 180ms linear; }
+.theme-toggle .theme-toggle__within__circle,
+.theme-toggle .theme-toggle__within__inner { transition: transform 260ms cubic-bezier(.2,.9,.3,1), opacity 180ms linear; transform-origin: 50% 50%; }
+
+/* light (sun) state */
+.theme-toggle { transform: rotate(0deg); }
+.theme-toggle .theme-toggle__within__circle { transform: translateX(0) scale(1); opacity: 1; }
+.theme-toggle .theme-toggle__within__inner { transform: scale(1); opacity: 1; }
+
+/* dark (moon) state: move/scale shapes to suggest a moon */
+.theme-toggle.is-dark { transform: rotate(40deg); }
+.theme-toggle.is-dark .theme-toggle__within__circle { transform: translateX(5px) scale(0.84); opacity: 0.95; }
+.theme-toggle.is-dark .theme-toggle__within__inner { transform: scale(0.45); opacity: 0.95; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle .theme-toggle__within,
+  .theme-toggle .theme-toggle__within__circle,
+  .theme-toggle .theme-toggle__within__inner { transition: none !important; }
+}
+
+/* --- Animated toggle styles (knob + track) --- */
+.theme-toggle { background: transparent; border: none; }
+.theme-toggle__track { width: 100%; height: 100%; border-radius: 9999px; display:block; }
+.theme-toggle__knob { width: var(--knob-size); height: var(--knob-size); background: var(--knob-bg, #fff); border-radius:50%; box-shadow: 0 4px 10px rgba(2,6,23,0.08); transition: transform 240ms cubic-bezier(.2,.9,.3,1), background 180ms linear; position: absolute; top: 50%; left: 4px; transform: translateY(-50%) translateX(0); }
+.theme-toggle.is-dark .theme-toggle__knob { transform: translateY(-50%) translateX(calc(var(--toggle-width) - var(--knob-size) - 8px)); }
+
+/* toggle appearance per theme (colors only) */
+html.light .theme-toggle { --toggle-border: rgba(15,23,36,0.06); --toggle-bg: #f3f4f6; --knob-bg: #ffffff; }
+html.dark .theme-toggle { --toggle-border: rgba(255,255,255,0.08); --toggle-bg: rgba(255,255,255,0.04); --knob-bg: #0b1220; }
+
+/* per-theme link-pill colors */
+html.light .project-link { color: var(--accent); border-color: var(--accent); background: transparent; }
+html.light .project-link::after { color: #065f46; }
+html.dark .project-link { color: var(--accent); border-color: rgba(255,255,255,0.06); background: transparent; }
+html.dark .project-link::after { color: #bbf7d0; }
+
+/* End of consolidated theme file */
